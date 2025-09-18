@@ -1,17 +1,18 @@
 package linkedList;
 
 public class LinkedListIterator {
-    LinkedListNode current;
+    private LinkedListNode current;
     public LinkedListIterator(LinkedListNode current){
         this.current = current;
     }
-    public LinkedListNode current() {
+    public LinkedListNode getCurrent() {
         return this.current;
     }
     public int getCurrentData(){
-        return current.data;
+        return current.getData();
     }
-    public void next(){
-        current = current.next;
+    public LinkedListIterator next(){
+        this.current = this.current.next;
+        return this;
     }
 }
