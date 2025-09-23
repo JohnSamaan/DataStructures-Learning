@@ -5,20 +5,20 @@ import java.util.Objects;
 public class MyDoublyLinkedList <T>  {
     private DoublyLinkedListNode<T> head;
     private DoublyLinkedListNode<T> tail;
+    private int length=0;
     public MyDoublyLinkedList(){}
     public MyDoublyLinkedList(T data){
         this.head = new DoublyLinkedListNode<>(data);
         this.tail = new DoublyLinkedListNode<>(data);
+        this.length++;
     }
 
      public T getHead() {
         return head.getData();
     }
-
      public T getTail() {
         return tail.getData();
     }
-
     private DoublyLinkedListIterator<T> itr(){
         return new DoublyLinkedListIterator<>(this.head);
     }
@@ -42,7 +42,8 @@ public class MyDoublyLinkedList <T>  {
             dataNode.previous=tail;
             this.tail.next=dataNode;
         }
-            this.tail=dataNode;
+        this.tail=dataNode;
+        this.length++;
     }
     public void addBefore(T data, T newData) throws Exception{
         DoublyLinkedListNode<T> node = getNode(data);
@@ -58,6 +59,7 @@ public class MyDoublyLinkedList <T>  {
         newNode.previous = node.previous;
         node.previous = newNode;
         newNode.next = node;
+        this.length++;
     }
     public void addAfter(T data, T newData) throws Exception{
         DoublyLinkedListNode<T> node = getNode(data);
@@ -73,6 +75,7 @@ public class MyDoublyLinkedList <T>  {
         newNode.next=node.next;
         newNode.previous=node;
         node.next=newNode;
+        this.length++;
     }
     public void deleteItem(T data) throws Exception{
         DoublyLinkedListNode<T> node = getNode(data);
@@ -91,6 +94,7 @@ public class MyDoublyLinkedList <T>  {
             node.next.previous = node.previous;
             node.previous.next = node.next;
     }
+        this.length--;
     }
     public void update(T data,T newData)throws Exception{
         DoublyLinkedListNode<T> node = getNode(data);
@@ -104,5 +108,18 @@ public class MyDoublyLinkedList <T>  {
             itr.next();
         }
         System.out.println();
+    }
+    public int getLength(){
+        return this.length;
+    }
+    public void copyList(MyDoublyLinkedList<T> newList){
+        DoublyLinkedListIterator<T> itr = itr();
+        if (newList.getLength()==0) {
+            while (itr.getCurrent() != null) {
+                newList.insertLast(itr.getCurrent().getData());
+                itr.next();
+            }
+        }
+
     }
 }
