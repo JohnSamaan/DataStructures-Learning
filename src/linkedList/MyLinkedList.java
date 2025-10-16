@@ -3,11 +3,11 @@ package linkedList;
 public class MyLinkedList {
     LinkedListNode head;
     LinkedListNode tail;
+    private int length=0;
 
     public int getHead() {
         return head.getData();
     }
-
     public int getTail() {
         return tail.getData();
     }
@@ -33,6 +33,7 @@ public class MyLinkedList {
             this.tail.next=newNode;
         }
         this.tail=newNode;
+        this.length++;
     }
     public void addAfter(int destination, int newData) {
         LinkedListNode newNode = new LinkedListNode(newData);
@@ -44,6 +45,7 @@ public class MyLinkedList {
         newNode.next = destinationNode.next;
         }
         destinationNode.next = newNode;
+        this.length++;
     }
     public void addBefore(int destination, int newData){
         LinkedListNode node = new LinkedListNode(newData);
@@ -56,6 +58,7 @@ public class MyLinkedList {
             parent.next = node;
         }
         node.next=destinationNode;
+        this.length++;
     }
     public void deleteItem(int data) throws Exception {
         LinkedListNode node = getNode(data);
@@ -76,7 +79,7 @@ public class MyLinkedList {
         else {
             parent.next = node.next;
         }
-
+        this.length--;
     }
     public LinkedListNode getParent(LinkedListNode child) {
         LinkedListIterator itr = new LinkedListIterator(head);
@@ -100,5 +103,22 @@ public class MyLinkedList {
             iterator.next();
         }
         System.out.println(" ");
+    }
+    public int getLength(){
+        return this.length;
+    }
+    public void deleteHead() {
+            head=head.next;
+            this.length--;
+    }
+    public void insertFirst(int data){
+        if (this.head==null) {
+            LinkedListNode newNode = new LinkedListNode(data);
+            this.head= newNode;
+            this.tail= newNode;
+            this.length++;
+        }else {
+            addBefore(this.getHead(), data);
+        }
     }
 }

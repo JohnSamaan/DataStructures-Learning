@@ -22,7 +22,7 @@ public class MyDoublyLinkedList <T>  {
     private DoublyLinkedListIterator<T> itr(){
         return new DoublyLinkedListIterator<>(this.head);
     }
-     DoublyLinkedListNode<T> getNode(T data){
+    DoublyLinkedListNode<T> getNode(T data){
 
          DoublyLinkedListIterator<T> itr = itr();
          while (itr.getCurrent()!=null){
@@ -120,6 +120,5 @@ public class MyDoublyLinkedList <T>  {
                 itr.next();
             }
         }
-
     }
 }
