@@ -1,4 +1,4 @@
-package Stack;
+package stack;
 import linkedList.MyLinkedList;
 
 public class StackLikedListBased {
