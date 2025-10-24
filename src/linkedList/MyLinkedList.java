@@ -1,21 +1,21 @@
 package linkedList;
 
-public class MyLinkedList {
-    LinkedListNode head;
-    LinkedListNode tail;
+public class MyLinkedList<T> {
+    LinkedListNode<T> head;
+    LinkedListNode<T> tail;
     private int length=0;
 
-    public int getHead() {
+    public T getHead() {
         return head.getData();
     }
-    public int getTail() {
+    public T getTail() {
         return tail.getData();
     }
 
-    public LinkedListNode getNode(int i) {
-        LinkedListIterator itr = new LinkedListIterator(this.head);
+    public LinkedListNode<T> getNode(T data) {
+        LinkedListIterator<T> itr = new LinkedListIterator<>(this.head);
         while (itr.getCurrent() != null){
-            if (itr.getCurrent().getData()==i){
+            if (itr.getCurrent().getData().equals(data)){
                 return itr.getCurrent();
             }
             else {
@@ -24,8 +24,8 @@ public class MyLinkedList {
         }
         return null;
     }
-    public void insertLast(int data){
-        LinkedListNode newNode = new LinkedListNode(data);
+    public void insertLast(T data){
+        LinkedListNode<T> newNode = new LinkedListNode<T>(data);
         if (this.head==null){
             this.head=newNode;
         }
@@ -35,9 +35,9 @@ public class MyLinkedList {
         this.tail=newNode;
         this.length++;
     }
-    public void addAfter(int destination, int newData) {
-        LinkedListNode newNode = new LinkedListNode(newData);
-        LinkedListNode destinationNode = getNode(destination);
+    public void addAfter(T destination, T newData) {
+        LinkedListNode<T> newNode = new LinkedListNode<T>(newData);
+        LinkedListNode<T> destinationNode = getNode(destination);
         if (destinationNode==tail) {
             tail = newNode;
         }
@@ -47,10 +47,10 @@ public class MyLinkedList {
         destinationNode.next = newNode;
         this.length++;
     }
-    public void addBefore(int destination, int newData){
-        LinkedListNode node = new LinkedListNode(newData);
-        LinkedListNode destinationNode = getNode(destination);
-        LinkedListNode parent = getParent(destinationNode);
+    public void addBefore(T destination, T newData){
+        LinkedListNode<T> node = new LinkedListNode<T>(newData);
+        LinkedListNode<T> destinationNode = getNode(destination);
+        LinkedListNode<T> parent = getParent(destinationNode);
         if (destinationNode == head){
             head = node;
         }
@@ -60,9 +60,9 @@ public class MyLinkedList {
         node.next=destinationNode;
         this.length++;
     }
-    public void deleteItem(int data) throws Exception {
-        LinkedListNode node = getNode(data);
-        LinkedListNode parent = getParent(node);
+    public void deleteItem(T data) throws Exception {
+        LinkedListNode<T> node = getNode(data);
+        LinkedListNode<T> parent = getParent(node);
         if(node==null){
             throw new Exception("item is not found.");
         }
@@ -81,8 +81,8 @@ public class MyLinkedList {
         }
         this.length--;
     }
-    public LinkedListNode getParent(LinkedListNode child) {
-        LinkedListIterator itr = new LinkedListIterator(head);
+    public LinkedListNode<T> getParent(LinkedListNode<T> child) {
+        LinkedListIterator<T> itr = new LinkedListIterator<>(head);
         while (itr.getCurrent() != null) {
             if (itr.getCurrent().next == child) {
                 return itr.getCurrent();
@@ -92,12 +92,12 @@ public class MyLinkedList {
         }
         return null;
     }
-    public void update(int data, int newData){
-        LinkedListNode node = getNode(data);
+    public void update(T data, T newData){
+        LinkedListNode<T> node = getNode(data);
         node.setData(newData);
     }
     public void printList(){
-        LinkedListIterator iterator = new LinkedListIterator(this.head);
+        LinkedListIterator<T> iterator = new LinkedListIterator<>(this.head);
         while (iterator.getCurrent()!=null){
             System.out.print(iterator.getCurrentData()+",");
             iterator.next();
@@ -111,9 +111,9 @@ public class MyLinkedList {
             head=head.next;
             this.length--;
     }
-    public void insertFirst(int data){
+    public void insertFirst(T data){
         if (this.head==null) {
-            LinkedListNode newNode = new LinkedListNode(data);
+            LinkedListNode<T> newNode = new LinkedListNode<T>(data);
             this.head= newNode;
             this.tail= newNode;
             this.length++;

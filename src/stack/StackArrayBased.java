@@ -1,12 +1,14 @@
 package stack;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class StackArrayBased {
-    private int[] arr;
+public class StackArrayBased<T> {
+    private T[] arr;
     private int topElementIndex;
-    public StackArrayBased(){
-        arr=new int[3];
+    @SuppressWarnings("unchecked")
+    public StackArrayBased(Class<T> clazz){
+        arr= (T[]) Array.newInstance(clazz, 10);
         this.topElementIndex =-1;
     }
     private void resize(){
@@ -16,21 +18,21 @@ public class StackArrayBased {
         }
     }
 
-    public void push(int data){
+    public void push(T data){
         this.resize();
         arr[topElementIndex+1]=data;
         topElementIndex++;
     }
-    public int pop() throws Exception{
+    public T pop(){
         if (topElementIndex < 0){
             throw new IndexOutOfBoundsException("your stack is empty");
         }
-            int temp = arr[topElementIndex];
-            arr[topElementIndex] = 0;
+            T temp = arr[topElementIndex];
+            arr[topElementIndex] = null;
             topElementIndex--;
             return temp;
     }
-    public int peak(){
+    public T peak(){
         return arr[topElementIndex];
     }
     public int size(){

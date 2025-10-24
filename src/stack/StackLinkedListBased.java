@@ -1,18 +1,18 @@
 package stack;
 import linkedList.MyLinkedList;
 
-public class StackLikedListBased {
-    private final MyLinkedList linkedList = new MyLinkedList();
+public class StackLinkedListBased<T> {
+    private final MyLinkedList<T> linkedList = new MyLinkedList<>();
 
-    public void push(int data){
+    public void push(T data){
         linkedList.insertFirst(data);
     }
-    public int pop(){
-        int peek = linkedList.getHead();
+    public T pop(){
+        T peak = linkedList.getHead();
         linkedList.deleteHead();
-        return peek;
+        return peak;
     }
-    public int peak(){
+    public T peak(){
         return linkedList.getHead();
     }
     public int size(){

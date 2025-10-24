@@ -1,13 +1,15 @@
 package queue;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class QueueArrayBased {
-    private int[] arr;
+public class QueueArrayBased<T> {
+    private T[] arr;
     private int indexToAdd;
     private int indexToDelete;
-    public QueueArrayBased(){
-        arr=new int[5];
+    @SuppressWarnings("unchecked")
+    public QueueArrayBased(Class<T> clazz){
+        arr=(T[]) Array.newInstance( clazz, 5);
         this.indexToAdd =0;
         this.indexToDelete = 0;
     }
@@ -27,21 +29,21 @@ public class QueueArrayBased {
             }
         }
     }
-    public void enqueue(int data){
+    public void enqueue(T data){
         this.resize();
         arr[indexToAdd]=data;
         indexToAdd++;
     }
-    public int dequeue() throws IndexOutOfBoundsException{
+    public T dequeue(){
         if (this.size()==0){
             throw new IndexOutOfBoundsException("your queue is empty");
         }
-        int temp = arr[indexToDelete];
-        arr[indexToDelete] = 0;
+        T temp = arr[indexToDelete];
+        arr[indexToDelete] = null;
         indexToDelete++;
         return temp;
     }
-    public int peak(){
+    public T peek(){
         return arr[indexToDelete];
     }
     public int size(){

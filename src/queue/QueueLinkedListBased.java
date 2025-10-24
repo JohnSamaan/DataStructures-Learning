@@ -2,25 +2,25 @@ package queue;
 
 import linkedList.MyLinkedList;
 
-public class QueueLinkedListBased {
-    private final MyLinkedList list;
+public class QueueLinkedListBased<T> {
+    private final MyLinkedList<T> list;
     public QueueLinkedListBased(){
-        list = new MyLinkedList();
+        list = new MyLinkedList<>();
     }
-    public void enqueue(int data){
+    public void enqueue(T data){
         list.insertLast(data);
     }
-    public int dequeue()throws Exception{
+    public T dequeue(){
         if (list.getLength()<=0) {
-            throw new Exception("Queue is empty:");
+            throw new IndexOutOfBoundsException("Queue is empty:");
         }
-        int temp = list.getHead();
+        T temp = list.getHead();
         list.deleteHead();
         return temp;
     }
-    public int peak()throws Exception{
+    public T peek(){
         if (list.getLength()<=0){
-            throw new Exception("Queue is empty:");
+            throw new IndexOutOfBoundsException("Queue is empty:");
         }
         return list.getHead();
     }
