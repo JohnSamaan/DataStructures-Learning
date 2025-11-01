@@ -16,7 +16,8 @@ public class Dictionary <Tkey, Tvalue>{
     public void put(Tkey key, Tvalue value){
         if (isExisting(key)==-1) {
             Pair<Tkey, Tvalue> newItem = new Pair<>(key, value);
-            arr[this.addTo()] = newItem;
+            int index=this.addTo();
+            arr[index] = newItem;
             dictionarySize++;
         }else {
             this.replace(key, value);
@@ -66,12 +67,16 @@ public class Dictionary <Tkey, Tvalue>{
         return oldLength;
     }
     private int isExisting(Tkey key){
-        for (int i = 0; i<= dictionarySize; i++){
+        for (int i = 0; i< arr.length; i++){
             if (arr[i]!=null && arr[i].getKey()==key){
                 return i;
             }
         }
         return -1;
+    }
+
+    public int arrSize() {
+        return arr.length;
     }
 }
 
