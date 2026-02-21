@@ -14,7 +14,7 @@ public class Dictionary <Tkey, Tvalue>{
         dictionarySize =0;
     }
     public void put(Tkey key, Tvalue value){
-        if (isExisting(key)==-1) {
+        if (isExists(key)==-1) {
             Pair<Tkey, Tvalue> newItem = new Pair<>(key, value);
             int index=this.addTo();
             arr[index] = newItem;
@@ -24,7 +24,7 @@ public class Dictionary <Tkey, Tvalue>{
         }
     }
     public void remove(Tkey key){
-        int index=isExisting(key);
+        int index=isExists(key);
         if (index!=-1){
             arr[index]=null;
             dictionarySize--;
@@ -66,7 +66,7 @@ public class Dictionary <Tkey, Tvalue>{
         arr=Arrays.copyOf(arr, oldLength+10);
         return oldLength;
     }
-    private int isExisting(Tkey key){
+    private int isExists(Tkey key){
         for (int i = 0; i< arr.length; i++){
             if (arr[i]!=null && arr[i].getKey()==key){
                 return i;
@@ -74,12 +74,7 @@ public class Dictionary <Tkey, Tvalue>{
         }
         return -1;
     }
-
-    public int arrSize() {
-        return arr.length;
-    }
 }
-
 
 
 class Pair<Tkey, Tvalue>{
